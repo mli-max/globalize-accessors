@@ -40,8 +40,6 @@ module Globalize::Accessors
     localized_attr_name = localized_attr_name_for(attr_name, locale)
 
     define_method :"#{localized_attr_name}=" do |value|
-      return if !translation_caches[locale] && value.blank?
-
       # custom dirty tracking to enable #{attr_name}_was, taken from globalize/rails
       if attribute_changed?(localized_attr_name)
         # If there's already a change, delete it if this undoes the change.
